@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css?8">
+	<script src="script.js"></script>
+	<title>Calculate</title>
+</head>
+<body onload="onload()">
+	<div class="mt-5" id = "divmain">
+			<div id="task">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn Btn" id="btnleft" onclick="task2()">Середній розхід на 100 км</button>
+                        <button type="button" class="btn Btn" id="btnright" onclick="task3()">Розхід на відстань</button>
+                    </div>
+			</div>
+			
+			<h2 id = "Task2"></h2>
+			<div id="task2">
+                <div class="info1">
+				    <span class="info">Дізнайтеся середню витрату палива автомобіля на 100 кілометрів по пройденій відстані та кількості літрів витраченого пального.</span>
+				</div>
+                <div class="row mt-3">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-1">
+                        <span class="text1">Витрачено палива</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="inpf" id="l" onkeyup="check();" type="number"><span class="l">л</span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-1">
+                        <span class="text2">Пройдена відстань</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="inpf" id="km" onkeyup="check();" type="number"><span class="km">км</span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-1">
+                        <span class="text3">Вартість палива</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="inpf" id="grnl" onkeyup="check();" type="number"><span class="grnl">грн/л</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4 text-center pb-5">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <button class="btn cleanBtn" onclick="cleanOne()" type="submit">Очистити</button>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <button class="btn logicBtn" disabled="disabled" id="logic" onclick=" mathTask1()">Розрахувати</button>
+                    </div>
+                </div>
+			</div>
+
+            <div class="answ" id="answer">
+                <div class="row mt-4">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 answers">
+                        <span class="text1answ">Середній розхід</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="grnlansone" id="lans" value=" "><span class="lanstwo">л/100км</span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 answers">
+                        <span class="text2answ">Середня вартість 1 км</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="grnlansone" id="kmans" value=" "><span class="kmanstwo">грн/1 км</span>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 answers">
+                        <span class="text3answ">Загальна вартість</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="grnlansone" id="grnlans" value=" "><span class="grnlanstwo">грн</span>
+                    </div>
+                </div>
+            </div>
+			
+
+
+
+
+
+
+
+
+            
+			<h2 id = "Task3"></h2>
+			<div id="task3">
+                <div class="info2">
+				    <span class="info">Дізнайтеся скільки пального ви витратите у поїздці, знаючи відстань, яку плануєте проїхати, а також <br />середню витрату палива вашого автомобіля.</span>
+				</div>
+
+                <div class="row mt-2">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 txt1_2">
+                        <span class="text1_2">Витрата палива <span class="text1_1_2">автомобіля</span></span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2">
+                        <input class="inpf" id="l_2" onkeyup="check_2();" type="number"><span class="l_2">л/100 км</span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-1">
+                        <span class="text2_2">Відстань поїздки</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="inpf" id="km_2" onkeyup="check_2();" type="number"><span class="km_2">км</span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 pt-1">
+                        <span class="text3_2">Вартість палива</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="inpf" id="grnl_2" onkeyup="check_2();" type="number"><span class="grnl_2">грн/л</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4 text-center pb-5">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <button class="btn cleanBtn" onclick="cleanTwo()" type="submit">Очистити</button>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <button class="btn logicBtn_2" disabled="disabled" id="logic_2" onclick=" mathTask2()">Розрахувати</button>
+                    </div>
+                </div>
+
+			</div>
+
+            <div class="answ_2" id="answer_2">
+                <div class="row mt-4">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 answers">
+                        <span class="text1answ_2">Витрата пального</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="grnlansone" id="lans_2" value=" "><span class="lanstwo">л/<span id='kmrez'>100</span>км</span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 answers">
+                        <span class="text2answ">Середня вартість 1 км</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="grnlansone" id="kmans_2" value=" "><span class="kmanstwo">грн/1 км</span>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 answers">
+                        <span class="text3answ">Загальна вартість</span>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <input class="grnlansone" id="grnlans_2" value=" "><span class="grnlanstwo">грн</span>
+                    </div>
+                </div>
+            </div>
+	    </div>
+	
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  
+<script>
+
+    var validOne = 0;
+    var validTwo = 0;
+
+    function cleanOne(){
+        var inpOne = document.getElementById('l');
+        var inpTwo = document.getElementById('km');
+        var inpThree = document.getElementById('grnl');
+        var divAnswer = document.getElementById('answer');
+
+        inpOne.value = '';
+        inpTwo.value = '';
+        inpThree.value = '';
+        divAnswer.style.display = 'none';
+
+        document.getElementById('lans').value = '';	
+        document.getElementById('kmans').value = '';	
+        document.getElementById('grnlans').value = '';
+
+        validOne = 0;
+
+        check();
+
+    }
+
+    function cleanTwo(){
+
+        var inpOne_2 = document.getElementById('l_2');
+        var inpTwo_2 = document.getElementById('km_2');
+        var inpThree_2 = document.getElementById('grnl_2');
+        var divAnswer_2 = document.getElementById('answer_2');
+
+        inpOne_2.value = '';
+        inpTwo_2.value = '';
+        inpThree_2.value = '';
+        divAnswer_2.style.display = 'none';
+
+        document.getElementById('lans_2').value = ' ';	
+        document.getElementById('kmans_2').value = '';	
+        document.getElementById('grnlans_2').value = ' ';
+        document.getElementById('kmrez').innerHTML = '100';
+
+        check_2();
+        validTwo = 0;
+        
+    }
+
+    function check() {
+        var l = document.getElementById('l'),
+        km = document.getElementById('km');
+        grnl = document.getElementById('grnl');
+        document.getElementById('logic').disabled = l.value && km.value && grnl.value ? false : "disabled"; 
+    }
+
+    function check_2() {
+        var l_2 = document.getElementById('l_2'),
+        km_2 = document.getElementById('km_2');
+        grnl_2 = document.getElementById('grnl_2');
+        document.getElementById('logic_2').disabled = l_2.value && km_2.value && grnl_2.value ? false : "disabled"; 
+
+    }
+
+    function ifLogicOneClick(){
+        var divanswOne = document.getElementById('answer');
+        if(validOne == 1){
+            divanswOne.style.display = 'block';
+        }
+        else{
+            divanswOne.style.display = 'none';
+        }
+
+    }
+
+    function ifLogicTwoClick(){
+        var divanswTwo = document.getElementById('answer_2');
+        if(validTwo == 1){
+            divanswTwo.style.display = 'block';
+        }
+        else{
+            divanswTwo.style.display = 'none';
+        }
+
+    }
+        
+    function onload() {
+        task2();
+        var divanswOne = document.getElementById('answer');
+        var divanswTwo = document.getElementById('answer_2');
+        divanswOne.style.display = 'none' ;
+        divanswTwo.style.display = 'none' ;
+    }
+
+    
+    function task2() {
+        var divTask2 = document.getElementById('task2');
+        var divTask3 = document.getElementById('task3');
+        var Task2h = document.getElementById('Task2');
+        var Task3h = document.getElementById('Task3');
+        var btnLeft = document.getElementById('btnleft');
+        var btnRight = document.getElementById('btnright');
+            
+        divTask2.style.display = 'block';
+        divTask3.style.display = 'none';
+        Task2h.style.display = 'block';
+        Task3h.style.display = 'none';
+        btnLeft.style.backgroundColor ='#5029EE';
+        btnLeft.style.color ='white';
+        btnRight.style.backgroundColor ='white';
+        btnRight.style.color ='#5029EE';
+        var divanswTwo = document.getElementById('answer_2');
+        divanswTwo.style.display = 'none' ;
+        
+        ifLogicOneClick();
+
+        if(validOne == 0){
+            cleanOne();
+        }
+        
+    }
+
+    function task3() {
+        var divTask2 = document.getElementById('task2');
+        var divTask3 = document.getElementById('task3');
+        var Task2h = document.getElementById('Task2');
+        var Task3h = document.getElementById('Task3');
+        var btnLeft = document.getElementById('btnleft');
+        var btnRight = document.getElementById('btnright');
+
+        divTask3.style.display = 'block';
+        divTask2.style.display = 'none';
+        Task2h.style.display = 'none';
+        Task3h.style.display = 'block';
+        btnRight.style.backgroundColor ='#5029EE';
+        btnRight.style.color ='white';
+        btnLeft.style.backgroundColor ='white';
+        btnLeft.style.color ='#5029EE';
+        var divAnsOne = document.getElementById('answer');
+        divAnsOne.style.display = 'none';
+        
+        ifLogicTwoClick();
+
+        if(validTwo == 0){
+            cleanTwo();
+        }
+    }
+
+    function mathTask1() {
+        var l = document.getElementById('l').value;
+        var km = document.getElementById('km').value;
+        var grnl = document.getElementById('grnl').value;
+        var medRoz = 0, medValueOneKM = 0, total = 0;
+        
+        medRoz = (l / km) * 100;
+
+        medValueOneKM = (grnl * medRoz) / 100;
+
+        total = medValueOneKM * km;
+        
+        document.getElementById('lans').value = medRoz.toFixed(2);	
+        document.getElementById('kmans').value = medValueOneKM.toFixed(2);	
+        document.getElementById('grnlans').value = total.toFixed(0);
+        document.getElementById('lans').disabled = true;
+        document.getElementById('kmans').disabled = true;
+        document.getElementById('grnlans').disabled = true;
+
+        validOne = 1;
+
+        var divanswOne = document.getElementById('answer');
+        divanswOne.style.display = 'block';
+    }
+
+    function mathTask2() {
+        var l_2 = document.getElementById('l_2').value;
+        var km_2 = document.getElementById('km_2').value;
+        var grnl_2 = document.getElementById('grnl_2').value;
+        var divAnswerTwo = document.getElementById('answer_2');
+        var lostOil = 0, medValueOneKM = 0, total = 0;
+        
+        lostOil = km_2 / 100 * l_2;
+
+        medValueOneKM = grnl_2 * l_2 / 100;
+
+        total = grnl_2 * lostOil;
+
+        validTwo = 1;
+        
+        document.getElementById('lans_2').value = lostOil.toFixed(2);	
+        document.getElementById('kmans_2').value = medValueOneKM.toFixed(2);	
+        document.getElementById('grnlans_2').value = total.toFixed(2);
+        document.getElementById('kmrez').innerHTML = km_2;
+        document.getElementById('lans_2').disabled = true;
+        document.getElementById('kmans_2').disabled = true;
+        document.getElementById('grnlans_2').disabled = true;
+
+        var divanswTwo = document.getElementById('answer_2');
+        divanswTwo.style.display = 'block' ;
+    
+    }
+
+</script>
+
+</body>
+</html>
